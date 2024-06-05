@@ -76,15 +76,15 @@ void    draw_cube(t_image *data, int x, int y, int color)
 int key_hook(int keycode, t_pata *data)
 {
     if (keycode == 65363 && worldMap[(int)((data->player_pos.i) / 64)][(int)((data->player_pos.j + 64) / 64)] == 0)
-        {data->player_pos.pa -=0.1; if (data->player_pos.pa < 0) {data->player_pos.pa += 2*PI;} ; data->player_pos.pdi= cos(data->player_pos.pa) * 5; data->player_pos.pdj= sin(data->player_pos.pa) * 5;}
+        data->player_pos.j += 5;
     else if (keycode == 65361 && worldMap[(int)((data->player_pos.i) / 64)][(int)((data->player_pos.j - 64) / 64)] == 0)
-        {data->player_pos.pa +=0.1; if (data->player_pos.pa > 0) {data->player_pos.pa -= 2*PI;} ; data->player_pos.pdi= cos(data->player_pos.pa) * 5; data->player_pos.pdj= sin(data->player_pos.pa) * 5;}
+        data->player_pos.j -= 5;
     else if (keycode == 65362 && worldMap[(int)((data->player_pos.i - 64) / 64)][(int)((data->player_pos.j) / 64)] == 0)
-        {data->player_pos.i-=data->player_pos.pdi; data->player_pos.j-=data->player_pos.pdj;}
+        data->player_pos.i -= 5;
     else if (keycode == 65364 && worldMap[(int)((data->player_pos.i + 64) / 64)][(int)((data->player_pos.j) / 64)] == 0)
-        {data->player_pos.i+=data->player_pos.pdi; data->player_pos.j+=data->player_pos.pdj;}
-    // mlx_put_image_to_window(data->mlx, data->win, data->background.img, 0, 0);
-    // mlx_put_image_to_window(data->mlx, data->win, data->player.img, data->player_pos.j , data->player_pos.i );
+        data->player_pos.i += 5;
+    mlx_put_image_to_window(data->mlx, data->win, data->background.img, 0, 0);
+    mlx_put_image_to_window(data->mlx, data->win, data->player.img, data->player_pos.j , data->player_pos.i );
     return (0);
 }
 
@@ -159,11 +159,9 @@ int	main(void)
     }
     data.player_pos.i = i *64;
     data.player_pos.j = j * 64;
-    data.player_pos.pa = 0;
-    data.player_pos.pdi=cos(data.player_pos.pa) * 5; data.player_pos.pdj=sin(data.player_pos.pa) * 5; 
 	mlx_put_image_to_window(data.mlx, data.win, data.background.img, 0, 0);
     mlx_put_image_to_window(data.mlx, data.win, data.player.img, data.player_pos.j, data.player_pos.i);
-    mlx_put_image_to_window(data.mlx, data.win, data.line.img, data.player_pos.j + data.player_pos., data.player_pos.i - 32);
+    mlx_put_image_to_window(data.mlx, data.win, data.line.img, data.player_pos.j, data.player_pos.i);
     movement(&data);
 	mlx_loop(data.mlx);
 }

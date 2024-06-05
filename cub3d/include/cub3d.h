@@ -14,9 +14,6 @@ typedef struct s_player
 {
     double      i;
     double      j;
-    double      pdi;
-    double      pdj;
-    double      pa;
     char    orientation;
 }t_player;
 
