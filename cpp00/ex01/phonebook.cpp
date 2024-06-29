@@ -6,10 +6,15 @@ int		Contact::check()
 		return (0);
 	return (1);
 }
+
 int has_digit(std::string parameter)
 {
-    int i = 0;
-    int length = (int)parameter.size();
+    int i {0};
+
+    const int length {static_cast<int> (parameter.size())}; 	/* C style type casting works just fine, but it's more agressive and not preferable in C++
+																	C style initialization is more agressive on narrowing conversions brace initialization is more secure
+																		length is declared constant cause its never changed later on ... we would use constexpr
+																			if we iniatialized length with a const value */ 
     while (i < length)
     {
         if (parameter[i] < 48 || parameter[i] > 57)
@@ -35,37 +40,38 @@ void 	Contact::add() {
 	while ( first_name.empty() )
 	{
     	std::cout << "Enter the first name: ";
-    	getline(std::cin, first_name);
+    	getline(std::cin >> std::ws, first_name);
 	}
 	while ( last_name.empty() ) 
 	{
     	std::cout << "Enter the last name: ";
-    	getline(std::cin , last_name);	
+    	getline(std::cin >> std::ws , last_name);	
 	}
 	while ( nickname.empty() )
 	{
     	std::cout << "Enter the nickname: ";
-    	getline(std::cin ,nickname);
+    	getline(std::cin >> std::ws ,nickname);
 	}
 	while ( phone_number.empty() || !has_digit(phone_number))
 	{
     	std::cout << "Enter the phone number: ";
-    	getline(std::cin, phone_number);
+    	getline(std::cin >> std::ws , phone_number);
 	}
 	while ( darkest_secret.empty() )
 	{
     	std::cout << "Enter the darkest secret: ";
-    	getline(std::cin , darkest_secret);
+    	getline(std::cin >> std::ws , darkest_secret); 	// getline() instead of regular std::cin so it consider whitespaces
+														// adding std::ws so it ignore leading whitespaces
 	}
 }
 
 void 	Contact::display() {
-    std::cout << "\nContact Details:" << std::endl;
-    std::cout << "First Name: " << first_name << std::endl;
-    std::cout << "Last Name: " << last_name << std::endl;
-    std::cout << "Nickname: " << nickname << std::endl;
-    std::cout << "Phone Number: " << phone_number << std::endl;
-    std::cout << "Darkest Secret: " << darkest_secret << std::endl;
+    std::cout << "\nContact Details:" << "\n";	// prefers "\n" cause std::endl flushes our buffer every time we call it...
+    std::cout << "First Name: " << first_name << "\n";
+    std::cout << "Last Name: " << last_name << "\n";
+    std::cout << "Nickname: " << nickname << "\n";
+    std::cout << "Phone Number: " << phone_number << "\n";
+    std::cout << "Darkest Secret: " << darkest_secret << "\n";
 }
 
 void	PhoneBook::addcontact(int index)
@@ -92,15 +98,20 @@ std::string	PhoneBook::display_contactparameter(int index, std::string parameter
 
 int main(void)
 {
-	PhoneBook user;
-	std::string input;
-	int contact_nb = 0;
+
+	PhoneBook 	user;
+
+	std::string input; 	// preferable to use std::string_view for read_only strings so u don't have to make copies of string on every call
+						// requires <string_view> library
+	int contact_nb {0};
+	
 	int index;
+
 	while(1)
 	{
-		std::cout << "Choose a command:\tADD\tSEARCH\tEXIT" << std::endl;
-		getline(std::cin, input);
-		if (!input.compare("ADD"))
+		std::cout << "Choose a command:\tADD\tSEARCH\tEXIT" << "\n";
+		getline(std::cin >> std::ws, input);
+		if (!input.compare("ADD")) // Calling ".compare()" member function of string object
 		{
 			user.addcontact(contact_nb);
 			contact_nb = (contact_nb + 1) % 8;
@@ -115,8 +126,8 @@ int main(void)
 				std::cout << (i + 1) ;
 				std::cout << "|";
 				if (user.display_contactparameter(i,"first name").size() <= 10)
-				    std::cout << std::string(10 - user.display_contactparameter(i,"first name").size(), ' ') + 
-				        user.display_contactparameter(i,"first name").substr(0,10) + "|";
+				    std::cout << std::string(10 - user.display_contactparameter(i, "first name").size(), ' ') + 
+				        user.display_contactparameter(i, "first name").substr(0 ,10) + "|";
 				else
 				    std::cout << user.display_contactparameter(i,"first name").substr(0,9) + "." + "|";
 				if (user.display_contactparameter(i,"last name").size() < 10)
@@ -133,7 +144,7 @@ int main(void)
 				i++;
 			}
 			std::cout << "Enter the index :";
-			std::cin >> index;
+			std::cin >> index; 		// can ignore whitespaces just fine
 			user.displaycontact(index - 1);
 		}
 		else if (!input.compare("EXIT"))
