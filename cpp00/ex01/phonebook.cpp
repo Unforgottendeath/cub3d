@@ -9,9 +9,9 @@ int		Contact::check()
 
 int has_digit(std::string parameter)
 {
-    int i {0};
+    int i = 0;
 
-    const int length {static_cast<int> (parameter.size())}; 	/* C style type casting works just fine, but it's more agressive and not preferable in C++
+    const int length = static_cast<int> (parameter.size()); 	/* C style type casting works just fine, but it's more agressive and not preferable in C++
 																	C style initialization is more agressive on narrowing conversions brace initialization is more secure
 																		length is declared constant cause its never changed later on ... we would use constexpr
 																			if we iniatialized length with a const value */ 
@@ -23,7 +23,8 @@ int has_digit(std::string parameter)
     }
     return 1;
 }
-std::string Contact::display_parameter(std::string parameter)
+
+std::string Contact::display_parameter(const std::string &parameter)
 {
 	if ( !parameter.compare("first name"))
 		return first_name;
@@ -91,7 +92,10 @@ int	PhoneBook::checkcontact(int index)
 	return 0;
 }
 
-std::string	PhoneBook::display_contactparameter(int index, std::string parameter)
+//	Passing std::string by reference instead of value to avoid making a copy (expensive) ---> reference is just an alias to an object but in our case its const
+//	so its value can't be changed withing the scope of the function
+
+std::string	PhoneBook::display_contactparameter(int index, const std::string& parameter)
 {
 	return (contacts[index].display_parameter(parameter));
 }
@@ -101,11 +105,14 @@ int main(void)
 
 	PhoneBook 	user;
 
-	std::string input; 	// preferable to use std::string_view for read_only strings so u don't have to make copies of string on every call
-						// requires <string_view> library
-	int contact_nb {0};
+	std::string input = ""; 
+
+	int contact_nb = 0;
 	
-	int index;
+	//	const int * : const value 
+	//	int* const : const pointer
+
+	int index = 0;
 
 	while(1)
 	{
@@ -130,16 +137,16 @@ int main(void)
 				        user.display_contactparameter(i, "first name").substr(0 ,10) + "|";
 				else
 				    std::cout << user.display_contactparameter(i,"first name").substr(0,9) + "." + "|";
-				if (user.display_contactparameter(i,"last name").size() < 10)
-				    std::cout << std::string(10 - user.display_contactparameter(i,"last name").size(), ' ') + 
+				if (user.display_contactparameter(i, "last name").size() < 10)
+				    std::cout << std::string(10 - user.display_contactparameter(i, "last name").size(), ' ') + 
 				        user.display_contactparameter(i,"last name").substr(0,10) + "|";
 				else
 				    std::cout << user.display_contactparameter(i,"last name").substr(0,9) + "." + "|";
-				if (user.display_contactparameter(i,"nickname").size() < 10)
-				    std::cout << std::string(10 - user.display_contactparameter(i,"nickname").size(), ' ') + 
-				        user.display_contactparameter(i,"nickname").substr(0,10) + "|";
+				if (user.display_contactparameter(i, "nickname").size() < 10)
+				    std::cout << std::string(10 - user.display_contactparameter(i, "nickname").size(), ' ') + 
+				        user.display_contactparameter(i, "nickname").substr(0,10) + "|";
 				else
-				    std::cout << user.display_contactparameter(i,"nickname").substr(0,9) + ".";
+				    std::cout << user.display_contactparameter(i, "nickname").substr(0,9) + ".";
 				std::cout << std::endl;
 				i++;
 			}
@@ -152,5 +159,5 @@ int main(void)
 			break;
 		}
 	}
-	exit(0);
+	return (0);
 }

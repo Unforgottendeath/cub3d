@@ -1,11 +1,11 @@
 CC = c++
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -std=c++98
 SRCS = phonebook.cpp
 OBJS = $(SRCS:.cpp=.o)
 NAME = phonebook
 
 %.o:%.c
-	$(CC) $(FLAGS) $< -o $@
+	c++ -Wall -Wextra -Werror -std=c++98 -c $< -o $@
 
 $(NAME): $(OBJS)
 	$(CC) $(FLAGS) -o $@ $(OBJS)

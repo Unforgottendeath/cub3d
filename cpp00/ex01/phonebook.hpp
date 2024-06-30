@@ -5,16 +5,16 @@
 #include <string>
 
 class Contact {
-    std::string first_name {};
-    std::string last_name {};
-    std::string nickname {};
-    std::string phone_number {};
-    std::string darkest_secret {};
+    std::string first_name ;
+    std::string last_name ;
+    std::string nickname ;
+    std::string phone_number ;
+    std::string darkest_secret ;
 
 public:
     void 		add();
 	int  		check();
-	std::string display_parameter(std::string parameter);
+	std::string display_parameter(const std::string &parameter);
 	void 		display();
 };
 
@@ -25,7 +25,7 @@ public:
     void addcontact(int i) ;
     void displaycontact(int i) ;
 	int  checkcontact(int i);
-	std::string display_contactparameter(int index, std::string parameter);
+	std::string display_contactparameter(int index, const std::string& parameter);
 };
 
 #endif
