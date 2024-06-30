@@ -4,10 +4,10 @@ int main(int ac, char **av)
 {
 	if (ac > 1)
 	{
-		int i {1};
+		int i = 1;
 		while ( av[i])
 		{
-			int j {};
+			int j = 0;
 			while (av[i][j])
 			{
 				if (av[i][j] >= 'a' && av[i][j] <= 'z')
