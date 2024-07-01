@@ -38,32 +38,20 @@ std::string Contact::display_parameter(const std::string &parameter)
 }
 
 void 	Contact::add() {
-	while ( first_name.empty() )
-	{
-    	std::cout << "Enter the first name: ";
-    	getline(std::cin >> std::ws, first_name);
-	}
-	while ( last_name.empty() ) 
-	{
-    	std::cout << "Enter the last name: ";
-    	getline(std::cin >> std::ws , last_name);	
-	}
-	while ( nickname.empty() )
-	{
-    	std::cout << "Enter the nickname: ";
-    	getline(std::cin >> std::ws ,nickname);
-	}
+	std::cout << "Enter the first name: ";
+	getline(std::cin >> std::ws, first_name);
+	std::cout << "Enter the last name: ";
+	getline(std::cin >> std::ws , last_name);
+	std::cout << "Enter the nickname: ";
+	getline(std::cin >> std::ws ,nickname);
 	while ( phone_number.empty() || !has_digit(phone_number))
 	{
     	std::cout << "Enter the phone number: ";
     	getline(std::cin >> std::ws , phone_number);
 	}
-	while ( darkest_secret.empty() )
-	{
-    	std::cout << "Enter the darkest secret: ";
-    	getline(std::cin >> std::ws , darkest_secret); 	// getline() instead of regular std::cin so it consider whitespaces
-														// adding std::ws so it ignore leading whitespaces
-	}
+	std::cout << "Enter the darkest secret: ";
+	getline(std::cin >> std::ws , darkest_secret); 	// getline() instead of regular std::cin so it consider whitespaces
+													// adding std::ws so it ignore leading whitespaces
 }
 
 void 	Contact::display() {
