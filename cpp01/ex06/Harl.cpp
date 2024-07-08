@@ -37,7 +37,6 @@ void    HarlFilter(std::string level)
 
     default:
         std::cout << "[ Probably complaining about insignificant problems ]" << "\n";
-        break;
 
     }
 }
