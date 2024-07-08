@@ -44,7 +44,7 @@ void 	Contact::add() {
 	getline(std::cin >> std::ws , last_name);
 	std::cout << "Enter the nickname: ";
 	getline(std::cin >> std::ws ,nickname);
-	while ( phone_number.empty() || !has_digit(phone_number))
+	while ( !has_digit(phone_number))
 	{
     	std::cout << "Enter the phone number: ";
     	getline(std::cin >> std::ws , phone_number);
@@ -108,13 +108,14 @@ int main(void)
 		getline(std::cin >> std::ws, input);
 		if (!input.compare("ADD")) // Calling ".compare()" member function of string object
 		{
+			std::cout << "Contact number : " << contact_nb << "\n";
 			user.addcontact(contact_nb);
 			contact_nb = (contact_nb + 1) % 8;
 		}
 		else if (!input.compare("SEARCH"))
 		{
 			int i = 0;
-			while (user.checkcontact(i))
+			while ( i<8 && user.checkcontact(i))
 			{
 				std::cout << "     index|first name| last name|  nickname\n";
 				std::cout << "         ";
@@ -139,7 +140,19 @@ int main(void)
 				i++;
 			}
 			std::cout << "Enter the index :";
-			std::cin >> index; 		// can ignore whitespaces just fine
+			while (std::getline(std::cin, input))
+			{
+				std::stringstream ss(input);
+				if (ss >> index)
+				{
+					if (ss.eof() && index >=1 && index <= 8)
+					{   
+						break;
+					}
+				}
+				std::cout << "Error!" << std::endl;
+				std::cout << "Enter the index :";
+			}
 			user.displaycontact(index - 1);
 		}
 		else if (!input.compare("EXIT"))

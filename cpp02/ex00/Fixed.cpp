@@ -25,11 +25,12 @@ Fixed::~Fixed()
 Fixed::Fixed(const Fixed& _copy)
 {
     std::cout << "Copy constructor called\n";
-    fixed_point_nb = _copy.fixed_point_nb;
+    *this = _copy;
 }
 
 Fixed& Fixed::operator=(const Fixed& _copy)
 {
     std::cout << "Copy assignment operator called" << "\n";
+    fixed_point_nb = _copy.fixed_point_nb;
     return *this;
 }
