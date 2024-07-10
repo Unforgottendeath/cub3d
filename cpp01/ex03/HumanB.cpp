@@ -2,13 +2,16 @@
 
 void HumanB::attack()
 {
-    std::cout << Human_name << " attacks with their " 
-        << Weapon_type->getType() << "\n";
+    if (Weapon_type != NULL)
+    {
+        std::cout << Human_name << " attacks with their " 
+            << Weapon_type->getType() << "\n";
+    }
 }
 
-HumanB::HumanB(std::string _name)
+HumanB::HumanB(std::string _name) : Human_name(_name) , Weapon_type(NULL)
 {
-    Human_name = _name;
+    std::cout << "Constructing " << Human_name << "\n";
 }
 
 void HumanB::setWeapon(Weapon &Weapon_t)
@@ -18,6 +21,5 @@ void HumanB::setWeapon(Weapon &Weapon_t)
 
 HumanB::~HumanB()
 {
-    std::cout << "Destructing " << Human_name << " and " 
-        << Weapon_type->getType() << "\n";
+    std::cout << "Destructing " << Human_name << "\n";
 }
