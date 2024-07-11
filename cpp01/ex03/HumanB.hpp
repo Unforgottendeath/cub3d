@@ -10,8 +10,8 @@ class HumanB
 {
 
 private:
-    std::string     Human_name;
-    Weapon*         Weapon_type;
+    std::string     name;
+    Weapon*         Weapon_B;
 
 public:
     void attack();

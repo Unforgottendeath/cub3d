@@ -15,10 +15,11 @@ Sed::~Sed()
 int Sed::Replace()
 {
     std::ifstream   infile;
-    std::string     line;
+    std::string     line = "";
     std::string     replace;
     std::string     outfile_name = m_file_name + ".replace";
     size_t          index;
+    char             c;
 
     infile.open(m_file_name.data());
     if (!infile.is_open()){
@@ -31,20 +32,19 @@ int Sed::Replace()
         infile.close();
         return (1);
     }
-    while (std::getline(infile, line))
+    while (!infile.eof() && infile >> std::noskipws >> c)
+        line += c;
+    index = line.find(m_s1, 0);
+    while (index != std::string::npos)
     {
+        replace = line.substr(0, index);
+        line = line.substr(index+ m_s1.size(), line.size() - index + m_s1.size());
+        replace.insert(replace.size(), m_s2);
+        outfile.write(replace.data(), replace.size());
         index = line.find(m_s1, 0);
-        while (index != std::string::npos)
-        {
-            replace = line.substr(0, index);
-            line = line.substr(index+ m_s1.size(), line.size() - index + m_s1.size());
-            replace.insert(replace.size(), m_s2);
-            outfile.write(replace.data(), replace.size());
-            index = line.find(m_s1, 0);
-        }
-        if (!line.empty())
-            outfile.write(line.data(), line.size());
     }
+    if (!line.empty())
+        outfile.write(line.data(), line.size());
     infile.close();
     outfile.close();
     return (0);

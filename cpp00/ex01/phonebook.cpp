@@ -44,10 +44,12 @@ void 	Contact::add() {
 	getline(std::cin >> std::ws , last_name);
 	std::cout << "Enter the nickname: ";
 	getline(std::cin >> std::ws ,nickname);
-	while ( !has_digit(phone_number))
+	std::cout << "Enter the phone number: ";
+	getline(std::cin >> std::ws , phone_number);
+	while (!has_digit(phone_number))
 	{
-    	std::cout << "Enter the phone number: ";
-    	getline(std::cin >> std::ws , phone_number);
+		std::cout << "Enter the phone number: ";
+		getline(std::cin >> std::ws , phone_number);
 	}
 	std::cout << "Enter the darkest secret: ";
 	getline(std::cin >> std::ws , darkest_secret); 	// getline() instead of regular std::cin so it consider whitespaces
@@ -108,16 +110,16 @@ int main(void)
 		getline(std::cin >> std::ws, input);
 		if (!input.compare("ADD")) // Calling ".compare()" member function of string object
 		{
-			std::cout << "Contact number : " << contact_nb << "\n";
+			std::cout << "Contact number : " << contact_nb + 1 << "\n";
 			user.addcontact(contact_nb);
 			contact_nb = (contact_nb + 1) % 8;
 		}
 		else if (!input.compare("SEARCH"))
 		{
 			int i = 0;
+			std::cout << "     index|first name| last name|  nickname\n";
 			while ( i<8 && user.checkcontact(i))
 			{
-				std::cout << "     index|first name| last name|  nickname\n";
 				std::cout << "         ";
 				std::cout << (i + 1) ;
 				std::cout << "|";

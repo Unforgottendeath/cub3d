@@ -11,8 +11,8 @@ class HumanA
 {
 
 private:
-    std::string     Human_name;
-    Weapon*          Weapon_type;
+    std::string     name;
+    Weapon*          Weapon_A;
 
 public:
     void attack();

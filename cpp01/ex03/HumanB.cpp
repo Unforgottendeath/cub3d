@@ -2,24 +2,24 @@
 
 void HumanB::attack()
 {
-    if (Weapon_type != NULL)
+    if (Weapon_B != NULL)
     {
-        std::cout << Human_name << " attacks with their " 
-            << Weapon_type->getType() << "\n";
+        std::cout << name << " attacks with their " 
+            << Weapon_B->getType() << "\n";
     }
 }
 
-HumanB::HumanB(std::string _name) : Human_name(_name) , Weapon_type(NULL)
+HumanB::HumanB(std::string _name) : name(_name) , Weapon_B(NULL)
 {
-    std::cout << "Constructing " << Human_name << "\n";
+    std::cout << "Constructing " << name << "\n";
 }
 
 void HumanB::setWeapon(Weapon &Weapon_t)
 {
-    Weapon_type = &Weapon_t;
+    Weapon_B = &Weapon_t;
 }
 
 HumanB::~HumanB()
 {
-    std::cout << "Destructing " << Human_name << "\n";
+    std::cout << "Destructing " << name << "\n";
 }

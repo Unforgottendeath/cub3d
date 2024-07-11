@@ -2,8 +2,12 @@
 
 int main(void)
 {
-    Zombie *horde = zombieHorde(10, "Zoe");
-    for (int i = 0;i < 10;i++)
-        horde[i].announce();
+    int N = -1;
+    Zombie *horde = zombieHorde(N, "Zoe");
+    if (horde != NULL)
+    {
+        for (int i = 0;i < N;i++)
+            horde[i].announce();
+    }
     delete [] horde;
 }
