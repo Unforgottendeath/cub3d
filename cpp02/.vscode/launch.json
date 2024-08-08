@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/nfs/homes/relhamma/Desktop/Cub/cpp02/ex00",
-      "program": "/nfs/homes/relhamma/Desktop/Cub/cpp02/ex00/build/Debug/outDebug",
+      "cwd": "/nfs/homes/relhamma/Desktop/Cub/cpp02/ex01",
+      "program": "/nfs/homes/relhamma/Desktop/Cub/cpp02/ex01/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

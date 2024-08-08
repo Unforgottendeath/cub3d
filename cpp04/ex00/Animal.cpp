@@ -19,6 +19,11 @@ Animal& Animal::operator=(const Animal& _copy)
     return *this;
 }
 
+Animal::Animal() : type("Animal")
+{
+    std::cout << "Animal (" << "Animal) constructed !\n" ;
+}
+
 Animal::Animal(const Animal& _copy)
 {
     *this = _copy;

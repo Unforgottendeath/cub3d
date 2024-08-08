@@ -33,7 +33,10 @@ void ScavTrap::guardGate()
 void ScavTrap::takeDamage(unsigned int amount)
 {
     if (getHitPoints() == 0)
-        std::cout << "ScavTrap " << getName() << " is already dead\n";
+    {
+        std::cout << "ScavTrap " << getName() << " is dead\n";
+        return;
+    }
     if (getGuardGateid())
     {
         std::cout << "ScavTrap (" << getName() << ") is immune !\n";
@@ -47,9 +50,14 @@ void ScavTrap::takeDamage(unsigned int amount)
 
 void ScavTrap::beRepaired(unsigned int amount)
 {
+    if (getHitPoints() == 0)
+    {
+        std::cout << "ScavTrap " << getName() << " is dead\n";
+        return;
+    }
     if (getEnergyPoints() == 0)
     {
-        std::cout << "Out of EnergyPoints !\n";
+        std::cout << "ScavTrap " << getName() << " is out of EnergyPoints !\n";
         return;
     }
     std::cout << "ScavTrap(" << getName() << ") healed by "<< amount << "hp\n" ;
@@ -61,7 +69,7 @@ void ScavTrap::attack(const std::string& target)
 {
     if ( getHitPoints() == 0 )
     {
-        std::cout << "ScavTrap " << getName() << " is already dead\n";
+        std::cout << "ScavTrap " << getName() << " is dead\n";
         return;
     }
     if (getEnergyPoints() == 0 )

@@ -20,7 +20,7 @@ static bool isInside(int x1, int y1, int x2, int y2, int x3, int y3, int x, int 
    float A3 = area (x1, y1, x2, y2, x, y);
     
    /* Check if sum of A1, A2 and A3 is same as A */
-   return (A == A1 + A2 + A3);
+   return (A == A1 + A2 + A3 && A != A1 + A2 && A != A2 + A3 && A != A3 + A1);
 }
 
 bool bsp( Point const a, Point const b, Point const c, Point const point )

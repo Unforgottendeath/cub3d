@@ -52,6 +52,7 @@ Fixed::Fixed(const Fixed& _copy)
 
 Fixed& Fixed::operator=(const Fixed& _copy)
 {
+    (void)_copy;
     std::cout << "Copy assignment operator called" << "\n";
     fixed_point_nb = _copy.fixed_point_nb;
     return *this;
@@ -59,6 +60,6 @@ Fixed& Fixed::operator=(const Fixed& _copy)
 
 std::ostream& operator<<(std::ostream& out, const Fixed& _object)
 {
-    out << _object.fixed_point_nb / (float)(1 << _object.nb_bits);
+    out << _object.toFloat();
     return out;
 }

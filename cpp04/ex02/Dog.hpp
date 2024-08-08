@@ -2,7 +2,7 @@
 #ifndef __DOG_H__
 #define __DOG_H__
 
-#include "Animal.hpp"
+#include "AAnimal.hpp"
 #include "Cat.hpp"
 
 class Dog : public Animal

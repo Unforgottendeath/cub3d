@@ -1,6 +1,6 @@
 #include "ClapTrap.hpp"
 
-ClapTrap::ClapTrap(const std::string& _name, int x, int y, int z) : Name(_name), HitPoints(x), EnergyPoints(y), AttackDamage(z)
+ClapTrap::ClapTrap(const std::string& _name, int x, int y, int z) : Name(_name), HitPoints(x), EnergyPoints(y), AttackDamage(z), isonGuardGuate(0)
 {
     std::cout << "ClapTrap(" << Name << ") constructed\n";
 }
@@ -27,10 +27,8 @@ ClapTrap::~ClapTrap()
 void ClapTrap::takeDamage(unsigned int amount)
 {
     if (this->HitPoints == 0)
-        std::cout << "ClapTrap " << Name << " is already dead\n";
-    if (this->isonGuardGuate)
     {
-        std::cout << "ScavTrap (" << Name << ") is immune !\n";
+        std::cout << "ClapTrap " << Name << " is already dead\n";
         return;
     }
     else{
@@ -41,31 +39,36 @@ void ClapTrap::takeDamage(unsigned int amount)
 
 void ClapTrap::beRepaired(unsigned int amount)
 {
-    if (this->EnergyPoints == 0)
+    if (this->HitPoints == 0)
     {
-        std::cout << "Out of EnergyPoints !\n";
+        std::cout << "ClapTrap " << Name << " is dead\n";
         return;
     }
-    std::cout << "ClapTrap(" << Name << ") healed by "<< amount << "hp\n" ;
-    this->HitPoints = amount;
-    this->EnergyPoints--;
+    if (this->EnergyPoints == 0)
+        std::cout << "Out of EnergyPoints !\n";
+    else
+    {
+        std::cout << "ClapTrap(" << Name << ") healed by "<< amount << "hp\n" ;
+        this->HitPoints = amount;
+        this->EnergyPoints--;
+    }
 }
 
 void ClapTrap::attack(const std::string& target)
 {
-    if ( this->HitPoints == 0 )
+    if (this->HitPoints == 0)
     {
-        std::cout << "ClapTrap " << Name << " is already dead\n";
+        std::cout << "ClapTrap " << Name << " is dead\n";
         return;
     }
-    if (this->EnergyPoints == 0 )
-    {
+    if (this->EnergyPoints == 0)
         std::cout << "Out of EnergyPoints !\n";
-        return;
+    else
+    {
+        std::cout << "ClapTrap " << Name << " attacks " <<
+            target << " , causing " << AttackDamage << " points of damage!\n";
+        this->EnergyPoints--;
     }
-    std::cout << "ClapTrap " << Name << " attacks " <<
-        target << " , causing " << AttackDamage << " points of damage!\n";
-    this->EnergyPoints--;
 }
 
 const std::string& ClapTrap::getName()

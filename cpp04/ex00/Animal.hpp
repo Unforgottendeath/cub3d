@@ -12,8 +12,9 @@ protected:
     std::string type;
 
 public:
-    Animal(const std::string _name = "Animal");
+    Animal(const std::string _name);
     ~Animal();
+    Animal();
     Animal& operator=(const Animal& _copy);
     Animal(const Animal& _copy);
     virtual void makeSound() const;

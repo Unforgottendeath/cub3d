@@ -24,9 +24,9 @@ public:
     ~Fixed();
     int     getRawBits( void) const;
     void    setRawBits( int const raw );
-    friend std::ostream& operator<<(std::ostream& out, const Fixed& _object);
 
 };
+std::ostream& operator<<(std::ostream& out, const Fixed& _object);
 
 
 #endif
