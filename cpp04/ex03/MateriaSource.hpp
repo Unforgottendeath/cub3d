@@ -1,4 +1,3 @@
-/*
 #ifndef MATERIASOURCE_HPP
 #define MATERIASOURCE_HPP
 
@@ -23,5 +22,4 @@ class MateriaSource : public IMateriaSource
 };
 
 
-#endif // MATERIASOURCE_HPP
-*/
+#endif

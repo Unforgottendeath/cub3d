@@ -1,26 +1,13 @@
 #include "AMateria.hpp"
 
-AMateria::AMateria(const std::string& Type) : type(Type)
+AMateria::AMateria( void ) : type("")
 {
-    std::cout << "AMateria (" << Type << ") constructed !\n";
+    // std::cout << "AMateria ("<< this->type << ") is created " << std::endl;
 }
 
-std::string const & AMateria::getType() const
+AMateria::AMateria( std::string const & Type )  : type(Type)
 {
-    return type;
-}
-
-/*
-#include "AMateria.hpp"
-
-AMateria::AMateria( void ) : _type("")
-{
-    // std::cout << "* AMateria: materia is created *" << std::endl;
-}
-
-AMateria::AMateria( std::string const & type )  : _type(type)
-{
-    std::cout << "AMateria " << this->_type << " created" << std::endl;
+    // std::cout << "AMateria (" << this->type << ") is created" << std::endl;
 }
 
 AMateria::AMateria( AMateria const & src )
@@ -30,12 +17,12 @@ AMateria::AMateria( AMateria const & src )
 
 AMateria::~AMateria( void )
 {
-    std::cout << "AMateria " << this->_type << " destroyed" << std::endl;
+    // std::cout << "AMateria (" << this->type << ") destroyed" << std::endl;
 }
 
 std::string const & AMateria::getType() const
 {
-    return this->_type;
+    return this->type;
 }
 
 AMateria* AMateria::clone() const
@@ -45,6 +32,5 @@ AMateria* AMateria::clone() const
 
 void    AMateria::use( ICharacter& target )
 {
-    std::cout << "AMateria " << this->_type << " used on " << target.getName() << std::endl;
+    std::cout << "AMateria " << this->type << " used on " << target.getName() << std::endl;
 }
-*/

@@ -1,4 +1,4 @@
-/*
+#pragma once
 #ifndef ICHARACTER_HPP
 #define ICHARACTER_HPP
 
@@ -17,5 +17,4 @@ public:
     virtual void use(int idx, ICharacter& target) = 0;
 };
 
-#endif // ICHARACTER_HPP
-*/
+#endif

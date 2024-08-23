@@ -2,44 +2,25 @@
 
 Ice::Ice() : AMateria("ice")
 {
-    std::cout << "Ice constructed !\n"; 
-}
-
-AMateria* Ice::clone() const
-{
-    return new Ice;
-}
-
-Ice::~Ice()
-{
-    std::cout << "Ice destructed !\n";
-}
-
-/*
-#include "Ice.hpp"
-
-Ice::Ice() : AMateria("ice")
-{
-    // std::cout << "* Ice: materia is created *" << std::endl;
+    // std::cout << " Ice (materia) is created " << std::endl;
 }
 
 Ice::Ice( Ice const & src ) : AMateria("ice")
 {
     *this = src;
-    // std::cout << "* Ice: materia is copied *" << std::endl;
 }
 
 Ice&   Ice::operator=( const Ice& rhs ) {
     if (this != &rhs)
     {
-        this->_type = rhs._type;
+        this->type = rhs.type;
     }
     return *this;
 }
 
 Ice::~Ice()
 {
-    // std::cout << "* Ice: ice is destroyed *" << std::endl;
+    // std::cout << " Ice: ice is destroyed " << std::endl;
 }
 
 AMateria* Ice::clone() const
@@ -49,6 +30,5 @@ AMateria* Ice::clone() const
 
 void    Ice::use( ICharacter& target )
 {
-    std::cout << "I shoots an ice bolt at " << target.getName() << std::endl;
+    std::cout << "* shoots an ice bolt at " << target.getName() << " *\n";
 }
-*/

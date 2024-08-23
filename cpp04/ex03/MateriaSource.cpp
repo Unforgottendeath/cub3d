@@ -1,4 +1,3 @@
-/*
 #include "MateriaSource.hpp"
 
 MateriaSource::MateriaSource()
@@ -43,10 +42,8 @@ void    MateriaSource::learnMateria( AMateria* m )
         if (materias[i] == NULL)
         {
             materias[i] = m;
-            // std::cout << "MateriaSource learned " << m->getType() << std::endl;
             return;
         }
-    // std::cout << "MateriaSource can't learn " << m->getType() << std::endl;
 }
 
 AMateria*   MateriaSource::createMateria( std::string const& type ) {
@@ -55,4 +52,3 @@ AMateria*   MateriaSource::createMateria( std::string const& type ) {
             return materias[i]->clone();
     return NULL;
 }
-*/
